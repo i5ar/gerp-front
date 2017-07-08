@@ -1,0 +1,19 @@
+<template>
+  <h1>${header}</h1>
+
+  <section>
+    <form role="form" submit.delegate="postFormData()">
+      <label for="customer">Customer</label>
+      <input type="text" value.bind="customer" placeholder="giuseppe">
+      <label for="container_id">Container Id</label>
+      <input type="number" value.bind="containerId" placeholder="737">
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section>
+    <button click.delegate="getData()">Get</button>
+    <button click.delegate="postData()">Post</button>
+  </section>
+
+</template>

@@ -1,0 +1,14 @@
+<template>
+  <h1>${header}</h1>
+
+  <section>
+    <ul>
+      <li repeat.for="customer of customers.results">
+        <span>url: ${customer.url}</span><br />
+        <span>user: ${customer.user}</span><br />
+        <span>code: ${customer.code}</span>
+      </li>
+    </ul>
+  <section>
+
+</template>
