@@ -1,25 +1,20 @@
 import {HttpClient, json} from 'aurelia-fetch-client';
+import {inject} from 'aurelia-framework';
+import {State} from 'state';
 
 let httpClient = new HttpClient();
 
+@inject(State)
 export class Shelves {
-
-  // configureRouter(config, router) {
-  //   this.router = router;
-  //   // this.att = config.options.pushState=true;
-  //   config.map([
-  //     {route: '2', moduleId: 'shelf', name: 'shelf', nav: true, title: '2'}
-  //   ]);
-  // }
-
-  constructor() {
-    this.header = 'Binders';
+  constructor(state) {
+    this.heading = 'Shelves';
+    this.state = state;
 
     this.getShelves = () => {
       httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/shelves/')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.shelves = data;
       });
     };
@@ -41,17 +36,26 @@ export class Shelves {
       nums: this.nums
     };
     httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/shelves/', {
+      headers: {
+        'Authorization': 'JWT ' + this.state.token,
+        'Accept': 'application/json',
+        'X-Requested-With': 'Fetch'
+      },
       method: 'post',
       body: json(shelf)
     })
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      alert(`Shelf saved! ${data}`);
-      // Since the data is saved we add to the page.
-      this.getShelves();
+      if (data.id) {
+        alert(`Shelf ${data.id} created!`);
+        // Append the new data to the shelves list.
+        this.shelves.results.push(data);
+      }
+      // console.log(this.state.token);
     })
     .catch(error => {
+      console.log(error);
       alert('Shelf error!');
     });
   }

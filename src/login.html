@@ -1,12 +1,12 @@
 <template>
 
-  <h1>${header}</h1>
+  <h1>${heading}</h1>
 
   <section>
     <form role="form" submit.delegate="postLogin()">
       <label for="username">Username</label>
       <input type="text" value.bind="username" placeholder="username">
-      <label for="password">Container Id</label>
+      <label for="password">Password</label>
       <input type="password" value.bind="password">
       <button type="submit">Submit</button>
     </form>

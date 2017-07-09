@@ -1,8 +1,8 @@
 <template>
-  <h1>${header}</h1>
+  <h1>${heading}</h1>
 
   <section>
-    <form role="form" submit.delegate="postFormData()">
+    <form role="form" submit.delegate="postBinder()">
       <label for="customer">Customer</label>
       <input type="text" value.bind="customer">
       <label for="container_id">Container Id</label>
@@ -12,8 +12,7 @@
   </section>
 
   <section>
-    <button click.delegate="getData()">Get</button>
-    <button click.delegate="postData()">Post</button>
+    <button click.delegate="getBinders()">Get</button>
   </section>
 
 </template>

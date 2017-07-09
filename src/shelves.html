@@ -1,5 +1,5 @@
 <template>
-  <h1>${header}</h1>
+  <h1>${heading}</h1>
 
   <section>
     <form role="form" submit.delegate="postShelf()">
@@ -23,9 +23,10 @@
 
   <section>
     <ul>
+    <!-- https://github.com/kristianmandrup/amazing-aurelia-book/blob/master/basic-routing.md#parameterized-routing  -->
       <li repeat.for="shelf of shelves.results">
         <ul>
-          <li>Name: <a href="#">${shelf.name}</a></li>
+          <li>Name: <a route-href="route: shelf; params.bind: {id: shelf.id}">${shelf.name}</a></li>
           <li>Columns: ${shelf.cols}</li>
           <li>Rows: ${shelf.rows}</li>
           <li>Numbers: ${shelf.nums}</li>
