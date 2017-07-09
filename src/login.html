@@ -1,0 +1,15 @@
+<template>
+
+  <h1>${header}</h1>
+
+  <section>
+    <form role="form" submit.delegate="postLogin()">
+      <label for="username">Username</label>
+      <input type="text" value.bind="username" placeholder="username">
+      <label for="password">Container Id</label>
+      <input type="password" value.bind="password">
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+</template>

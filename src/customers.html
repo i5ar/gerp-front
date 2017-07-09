@@ -4,9 +4,10 @@
   <section>
     <ul>
       <li repeat.for="customer of customers.results">
-        <span>url: ${customer.url}</span><br />
-        <span>user: ${customer.user}</span><br />
-        <span>code: ${customer.code}</span>
+        <ul>
+          <li>User: ${customer.user}</li>
+          <li>Code: ${customer.code}</li>
+        </ul>
       </li>
     </ul>
   <section>

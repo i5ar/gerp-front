@@ -23,10 +23,10 @@ export class Binders {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      alert(`Saved binder from form! Customer: ${data.customer}`);
+      alert(`Binder saved! Customer: ${data.customer}`);
     })
     .catch(error => {
-      alert('Error saving binder from form!');
+      alert('Binder not saved!');
     });
   }
   getData() {
@@ -50,10 +50,10 @@ export class Binders {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      alert(`Saved binder! Customer: ${data.customer}`);
+      alert(`Binder saved! Customer: ${data.customer}`);
     })
     .catch(error => {
-      alert('Error saving binder!');
+      alert('Binder not saved!');
     });
   }
 
