@@ -4,8 +4,8 @@ import {HttpClient} from 'aurelia-fetch-client';
 @inject(HttpClient)
 export class Customers {
   constructor(http) {
-    this.header = 'Customers';
-    //Configure base URL
+    this.heading = 'Customers';
+    // Configure fetch
     http.configure(config => {
       config
         .withBaseUrl('http://127.0.0.1:8000/en/api/')

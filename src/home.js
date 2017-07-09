@@ -1,7 +1,7 @@
 export class Home {
 
   constructor() {
-    this.header = 'Home';
+    this.heading = 'Home';
   }
 
 }

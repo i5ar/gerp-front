@@ -1,0 +1,18 @@
+<template>
+
+  <h1>${heading} ${shelfId}</h1>
+
+  <section>
+    <ul>
+      <li>Name: ${shelf.name}</li>
+      <li if.bind="shelf.cols">Columns: ${ shelf.cols }</li>
+      <li if.bind="shelf.rows">Rows: ${ shelf.rows }</li>
+      <li>Numbers: ${shelf.nums}</li>
+    <ul>
+  </section>
+
+  <section>
+    <button click.delegate="deleteShelf()">Delete</button>
+  </section>
+
+</template>
