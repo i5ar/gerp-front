@@ -26,14 +26,14 @@ export class Login {
    */
   postLogin() {
     let loginForm = {username: this.username, password: this.password};
-    httpClient.fetch('http://127.0.0.1:8000/en/api-token-auth/', {
+    httpClient.fetch('http://django-env.mvsm3depy3.eu-central-1.elasticbeanstalk.com/en/api-token-auth/', {
       method: 'post',
       body: json(loginForm)
     })
     .then(response => response.json())
     .then(data => {
       this.state.token = data.token;
-      // console.log(data.token);
+      console.log(data.token);
       if (data.token) {
         alert('Authenticated!');
         this.redirectLogin();

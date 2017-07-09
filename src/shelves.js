@@ -11,7 +11,7 @@ export class Shelves {
     this.state = state;
 
     this.getShelves = () => {
-      httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/shelves/')
+      httpClient.fetch('http://django-env.mvsm3depy3.eu-central-1.elasticbeanstalk.com/en/api/shelves/shelves/')
       .then(response => response.json())
       .then(data => {
         // console.log(data);
@@ -35,7 +35,7 @@ export class Shelves {
       rows: this.rows,
       nums: this.nums
     };
-    httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/shelves/', {
+    httpClient.fetch('http://django-env.mvsm3depy3.eu-central-1.elasticbeanstalk.com/en/api/shelves/shelves/', {
       headers: {
         'Authorization': 'JWT ' + this.state.token,
         'Accept': 'application/json',
