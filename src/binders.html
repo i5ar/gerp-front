@@ -3,6 +3,8 @@
 
   <section>
     <form role="form" submit.delegate="postBinder()">
+      <label for="title">Title</label>
+      <input type="text" value.bind="title">
       <label for="customer">Customer</label>
       <input type="text" value.bind="customer">
       <label for="container_id">Container Id</label>
@@ -13,6 +15,17 @@
 
   <section>
     <button click.delegate="getBinders()">Get</button>
+  </section>
+
+  <section>
+    <ul>
+      <li repeat.for="binder of binders.results">
+        <ul>
+          <li>Title: ${binder.title}</li>
+          <li if.bind="binder.customer">Customer: ${binder.customer}</li>
+        <ul>
+      </li>
+    </ul>
   </section>
 
 </template>

@@ -1,12 +1,16 @@
-import {HttpClient, json} from 'aurelia-fetch-client';
+import {json} from 'aurelia-fetch-client';
+import {inject} from 'aurelia-framework';
+import {State} from 'state';
 
-let httpClient = new HttpClient();
-
+@inject(State)
 export class Binders {
-  constructor() {
+  constructor(state) {
     this.heading = 'Binders';
+    this.state = state;
+    this.binders;
   }
 
+  title = '';
   customer = '';
   containerId;
   /**
@@ -14,15 +18,24 @@ export class Binders {
    * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
    */
   postBinder() {
-    let binderForm = {customer: this.customer, container_id: this.containerId};
-    httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/binders/', {
+    let binderForm = {
+      title: this.title,
+      customer: this.customer,
+      container_id: this.containerId
+    };
+    this.state.http.fetch('api/shelves/binders/', {
+      headers: {
+        'Authorization': 'JWT ' + this.state.token,
+        'Accept': 'application/json',
+        'X-Requested-With': 'Fetch'
+      },
       method: 'post',
       body: json(binderForm)
     })
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      alert(`Binder saved! Customer: ${data.customer}`);
+      alert('Binder saved!');
     })
     .catch(error => {
       alert('Binder not saved!');
@@ -34,10 +47,17 @@ export class Binders {
    * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
    */
   getBinders() {
-    httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/binders/')
+    this.state.http.fetch('api/shelves/binders/', {
+      headers: {
+        'Authorization': 'JWT ' + this.state.token,
+        'Accept': 'application/json',
+        'X-Requested-With': 'Fetch'
+      }
+    })
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      this.binders = data;
     });
   }
 

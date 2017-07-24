@@ -1,8 +1,6 @@
-import {HttpClient, json} from 'aurelia-fetch-client';
+import {json} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {State} from 'state';
-
-let httpClient = new HttpClient();
 
 @inject(State)
 export class Shelves {
@@ -11,7 +9,7 @@ export class Shelves {
     this.state = state;
 
     this.getShelves = () => {
-      httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/shelves/')
+      state.http.fetch('api/shelves/shelves/')
       .then(response => response.json())
       .then(data => {
         // console.log(data);
@@ -20,10 +18,7 @@ export class Shelves {
     };
   }
 
-  name = '';
-  cols;
-  rows;
-  nums;
+  cols; rows; nums; name = '';
   /**
    * Post shelf.
    * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
@@ -35,7 +30,7 @@ export class Shelves {
       rows: this.rows,
       nums: this.nums
     };
-    httpClient.fetch('http://127.0.0.1:8000/en/api/shelves/shelves/', {
+    this.state.http.fetch('api/shelves/shelves/', {
       headers: {
         'Authorization': 'JWT ' + this.state.token,
         'Accept': 'application/json',

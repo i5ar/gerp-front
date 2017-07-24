@@ -1,23 +1,11 @@
 import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';
+import {State} from 'state';
 
-@inject(HttpClient)
+@inject(State)
 export class Customers {
-  constructor(http) {
+  constructor(state) {
     this.heading = 'Customers';
-    // Configure fetch
-    http.configure(config => {
-      config
-        .withBaseUrl('http://127.0.0.1:8000/en/api/')
-        .withDefaults({
-          credentials: 'same-origin',
-          headers: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'Fetch'
-          }
-        });
-    });
-    this.http = http;
+    this.state = state;
   }
 
   /**
@@ -25,7 +13,14 @@ export class Customers {
    * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
    */
   activate() {
-    this.http.fetch('shelves/customers/')
+    this.state.http.fetch('api/shelves/customers/', {
+      headers: {
+        'Authorization': 'JWT ' + this.state.token,
+        'Accept': 'application/json',
+        'X-Requested-With': 'Fetch'
+      },
+      method: 'get'
+    })
     .then(response => response.json())
     .then(data => {
       console.log(data);

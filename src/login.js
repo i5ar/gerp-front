@@ -1,9 +1,7 @@
-import {HttpClient, json} from 'aurelia-fetch-client';
+import {json} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {State} from 'state';
 import {Router} from 'aurelia-router';
-
-let httpClient = new HttpClient();
 
 @inject(State, Router)
 export class Login {
@@ -26,7 +24,8 @@ export class Login {
    */
   postLogin() {
     let loginForm = {username: this.username, password: this.password};
-    httpClient.fetch('http://127.0.0.1:8000/en/api-token-auth/', {
+
+    this.state.http.fetch('api-token-auth/', {
       method: 'post',
       body: json(loginForm)
     })
