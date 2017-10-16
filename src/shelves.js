@@ -9,7 +9,9 @@ export class Shelves {
     this.state = state;
 
     this.getShelves = () => {
-      state.http.fetch('api/shelves/shelves/')
+      state.http.fetch('api/shelves/shelves/', {
+        headers: {'Authorization': 'JWT ' + this.state.token}
+      })
       .then(response => response.json())
       .then(data => {
         // console.log(data);
@@ -44,10 +46,9 @@ export class Shelves {
       console.log(data);
       if (data.id) {
         alert(`Shelf ${data.id} created!`);
-        // Append the new data to the shelves list.
-        this.shelves.results.push(data);
       }
-      // console.log(this.state.token);
+      // Append the new data to the shelves list.
+      this.shelves.results.push(data);
     })
     .catch(error => {
       console.log(error);

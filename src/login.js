@@ -31,6 +31,8 @@ export class Login {
     })
     .then(response => response.json())
     .then(data => {
+      // Set username and token
+      this.state.username = this.username;
       this.state.token = data.token;
       // console.log(data.token);
       if (data.token) {

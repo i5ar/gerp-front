@@ -21,7 +21,8 @@ export class State {
         });
     });
 
-    // Set token
+    // Set username and token
+    this.username;
     this.token;
   }
 }
