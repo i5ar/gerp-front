@@ -118,6 +118,13 @@
           "aurelia-task-queue",
           "aurelia-templating",
           "aurelia-templating-binding",
+
+          {
+            "name": "fetch",
+            "path": "../node_modules/whatwg-fetch",
+            "main": "fetch"
+          },
+
           "aurelia-fetch-client",
           "text",
           {
