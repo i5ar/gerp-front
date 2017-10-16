@@ -34,11 +34,11 @@ export class Binders {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      alert('Binder saved!');
+      // console.log(data);
+      alert('Binder created!');
     })
     .catch(error => {
-      alert('Binder not saved!');
+      alert('Binder error!');
     });
   }
 
@@ -56,7 +56,7 @@ export class Binders {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
       this.binders = data;
     });
   }

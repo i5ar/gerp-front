@@ -23,7 +23,7 @@ export class Customers {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
       this.customers = data;
     });
   }

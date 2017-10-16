@@ -1,26 +1,15 @@
+import {json} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {State} from 'state';
 import {Router} from 'aurelia-router';
+
+// TODO: Rename class Binders
 
 @inject(State, Router)
 export class Shelf {
   constructor(state, router) {
     this.heading = 'Shelf';
     this.state = state;
-
-    this.getShelf = (id) => {
-      // NOTE: Firefox require a slash ('/') at the end of the URL.
-      this.state.http.fetch('api/shelves/shelves/' + id + '/')
-      .then(response => response.json())
-      .then(data => {
-        // console.log(data);
-        this.shelf = data;
-      })
-      .catch(error => {
-        console.log(error);
-      })
-    };
-
     /**
      * Redirect after delete.
      */
@@ -40,7 +29,6 @@ export class Shelf {
       method: 'delete'
     })
     .then(response => response)
-
     .then(data => {
       // console.log(data);
       if (data.ok) {
@@ -48,11 +36,71 @@ export class Shelf {
         this.redirectShelf();
       }
     })
-
     .catch(error => {
       console.log(error);
     });
   }
+
+  /**
+   * Post binder from a form.
+   * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
+   */
+  postBinder() {
+    let binderForm = {
+      title: this.title,
+      customer: this.customer,
+      container_id: this.containerId
+    };
+    this.state.http.fetch('api/shelves/binders/', {
+      headers: {
+        'Authorization': 'JWT ' + this.state.token,
+        'Accept': 'application/json',
+        'X-Requested-With': 'Fetch'
+      },
+      method: 'post',
+      body: json(binderForm)
+    })
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data);
+      alert('Binder created!');
+    })
+    .catch(error => {
+      alert('Binder error!');
+    });
+  }
+
+  /**
+   * Get binders.
+   * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
+   */
+  getBinders() {
+    this.state.http.fetch('api/shelves/binders/', {
+      headers: {
+        'Authorization': 'JWT ' + this.state.token,
+        'Accept': 'application/json',
+        'X-Requested-With': 'Fetch'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data);
+      this.binders = data;
+    });
+  }
+
+  getShelf = (id) => {
+    // NOTE: Firefox require a slash ('/') at the end of the URL.
+    this.state.http.fetch('api/shelves/shelves/' + id + '/')
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data);
+      this.shelf = data;
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  };
 
   /**
    * Get shelf parameter.

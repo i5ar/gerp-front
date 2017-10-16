@@ -3,13 +3,21 @@
 
   <section>
     <form role="form" submit.delegate="postBinder()">
+
       <label for="title">Title</label>
       <input type="text" value.bind="title">
+      <br>
+
       <label for="customer">Customer</label>
       <input type="text" value.bind="customer">
+      <br>
+
       <label for="container_id">Container Id</label>
       <input type="number" value.bind="containerId">
+      <br>
+
       <button type="submit">Submit</button>
+
     </form>
   </section>
 

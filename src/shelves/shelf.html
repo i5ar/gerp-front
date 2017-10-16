@@ -5,14 +5,68 @@
   <section>
     <ul>
       <li>Name: ${shelf.name}</li>
-      <li if.bind="shelf.cols">Columns: ${ shelf.cols }</li>
-      <li if.bind="shelf.rows">Rows: ${ shelf.rows }</li>
+      <li if.bind="shelf.cols">Columns: ${shelf.cols}</li>
+      <li if.bind="shelf.rows">Rows: ${shelf.rows}</li>
       <li>Numbers: ${shelf.nums}</li>
+    </ul>
+    <p if.bind="shelf.desc">Description: ${shelf.desc}</p>
     <ul>
+      <li repeat.for="c of shelf.container_set">
+        <a href.bind="c.url">${c.url}</a>
+        <ul>
+          <li repeat.for="b of c.binder_set">
+            <ul>
+              <li>${b.title}</li>
+              <li><a href.bind="b.url">${b.url}</a></li>
+              <li if.bind="b.customer">${b.customer}</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </section>
 
   <section>
-    <button click.delegate="deleteShelf()">Delete</button>
+    <button click.delegate="deleteShelf()">Delete shelf</button>
   </section>
+  <hr />
+
+  <!-- Binders -->
+
+    <section>
+      <form role="form" submit.delegate="postBinder()">
+
+        <label for="title">Title</label>
+        <input type="text" value.bind="title">
+        <br>
+
+        <label for="customer">Customer</label>
+        <input type="text" value.bind="customer">
+        <br>
+
+        <label for="container_id">Container Id</label>
+        <input type="number" value.bind="containerId">
+        <br>
+
+        <button type="submit">Submit binder</button>
+
+      </form>
+    </section>
+
+    <section>
+      <button click.delegate="getBinders()">Get paginated binders (all)</button>
+    </section>
+
+    <section>
+      <ul>
+        <li repeat.for="binder of binders.results">
+          <ul>
+            <li>Title: ${binder.title}</li>
+            <li if.bind="binder.customer">Customer: ${binder.customer}</li>
+          <ul>
+        </li>
+      </ul>
+    </section>
+
 
 </template>

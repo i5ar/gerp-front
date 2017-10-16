@@ -20,7 +20,7 @@ export class Shelves {
     };
   }
 
-  cols; rows; nums; name = '';
+  // cols; rows; nums; name = '';
   /**
    * Post shelf.
    * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
@@ -32,6 +32,7 @@ export class Shelves {
       rows: this.rows,
       nums: this.nums
     };
+    // console.log(shelf);
     this.state.http.fetch('api/shelves/shelves/', {
       headers: {
         'Authorization': 'JWT ' + this.state.token,
@@ -47,7 +48,7 @@ export class Shelves {
       if (data.id) {
         alert(`Shelf ${data.id} created!`);
       }
-      // Append the new data to the shelves list.
+      // NOTE: Append the new data to the shelves list.
       this.shelves.results.push(data);
     })
     .catch(error => {
@@ -64,3 +65,15 @@ export class Shelves {
   }
 
 }
+
+
+/*
+works
+Object { name: "rer", cols: "2", rows: "2", nums: undefined }
+
+works
+Object { name: "bgd", cols: undefined, rows: undefined, nums: "3" }
+
+doesn't works
+Object { name: "rere", cols: "", rows: "", nums: "5" }
+*/
