@@ -1,4 +1,5 @@
 import environment from './environment';
+import 'fetch';  // firefox polyfill
 
 export function configure(aurelia) {
   aurelia.use
