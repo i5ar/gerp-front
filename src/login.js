@@ -1,9 +1,7 @@
-import {HttpClient, json} from 'aurelia-fetch-client';
+import {json} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {State} from 'state';
 import {Router} from 'aurelia-router';
-
-let httpClient = new HttpClient();
 
 @inject(State, Router)
 export class Login {
@@ -26,14 +24,17 @@ export class Login {
    */
   postLogin() {
     let loginForm = {username: this.username, password: this.password};
-    httpClient.fetch('http://django-env.mvsm3depy3.eu-central-1.elasticbeanstalk.com/en/api-token-auth/', {
+
+    this.state.http.fetch('api-token-auth/', {
       method: 'post',
       body: json(loginForm)
     })
     .then(response => response.json())
     .then(data => {
+      // Set username and token
+      this.state.username = this.username;
       this.state.token = data.token;
-      console.log(data.token);
+      // console.log(data.token);
       if (data.token) {
         alert('Authenticated!');
         this.redirectLogin();

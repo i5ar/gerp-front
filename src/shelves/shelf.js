@@ -1,35 +1,24 @@
 import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';
 import {State} from 'state';
 import {Router} from 'aurelia-router';
 
-@inject(HttpClient, State, Router)
+@inject(State, Router)
 export class Shelf {
-  constructor(http, state, router) {
+  constructor(state, router) {
     this.heading = 'Shelf';
-    this.http = http;
     this.state = state;
 
-    // Configure fetch
-    http.configure(config => {
-      config
-        .withBaseUrl('http://127.0.0.1:8000/en/api/shelves/shelves/')
-        .withDefaults({
-          credentials: 'same-origin',
-          headers: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'Fetch'
-          }
-        });
-    });
-
     this.getShelf = (id) => {
-      http.fetch(id)
+      // NOTE: Firefox require a slash ('/') at the end of the URL.
+      this.state.http.fetch('api/shelves/shelves/' + id + '/')
       .then(response => response.json())
       .then(data => {
         // console.log(data);
         this.shelf = data;
-      });
+      })
+      .catch(error => {
+        console.log(error);
+      })
     };
 
     /**
@@ -44,7 +33,7 @@ export class Shelf {
    * Delete shelf.
    */
   deleteShelf() {
-    this.http.fetch(this.shelfId, {
+    this.state.http.fetch('api/shelves/shelves/' + this.shelfId + '/?format=json', {
       headers: {
         'Authorization': 'JWT ' + this.state.token
       },
