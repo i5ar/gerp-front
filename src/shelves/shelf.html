@@ -36,7 +36,7 @@
   <hr />
 
   <!-- Binders -->
-  <h3>Binders</h3>
+  <h3>Create binder</h3>
 
     <section>
       <form role="form" submit.delegate="postBinderFromShelf()">
@@ -53,20 +53,24 @@
         <input type="number" value.bind="containerId">
         <br />
 
-        <button type="submit">Submit binder</button>
+        <button type="submit">Post binder</button>
 
       </form>
     </section>
 
+    <h3>Retrieve binder</h3>
     <section>
-      <ul>
-        <li repeat.for="binder of binders.results">
-          <ul>
-            <li>Title: ${binder.title}</li>
-            <li if.bind="binder.customer">Customer: ${binder.customer}</li>
-          <ul>
-        </li>
-      </ul>
+
+    </section>
+
+    <h3>Update binder</h3>
+    <section>
+
+    </section>
+
+    <h3>Destroy binder</h3>
+    <section>
+
     </section>
 
 </template>
