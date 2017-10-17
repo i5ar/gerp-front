@@ -3,6 +3,10 @@
   <h1>${heading} ${shelfId}</h1>
 
   <section>
+    <button click.delegate="getShelf(shelfId)">Get shelf</button>
+  </section>
+
+  <section>
     <ul>
       <li>Name: ${shelf.name}</li>
       <li if.bind="shelf.cols">Columns: ${shelf.cols}</li>
@@ -32,29 +36,26 @@
   <hr />
 
   <!-- Binders -->
+  <h3>Binders</h3>
 
     <section>
-      <form role="form" submit.delegate="postBinder()">
+      <form role="form" submit.delegate="postBinderFromShelf()">
 
         <label for="title">Title</label>
         <input type="text" value.bind="title">
-        <br>
+        <br />
 
         <label for="customer">Customer</label>
         <input type="text" value.bind="customer">
-        <br>
+        <br />
 
         <label for="container_id">Container Id</label>
         <input type="number" value.bind="containerId">
-        <br>
+        <br />
 
         <button type="submit">Submit binder</button>
 
       </form>
-    </section>
-
-    <section>
-      <button click.delegate="getBinders()">Get paginated binders (all)</button>
     </section>
 
     <section>
@@ -67,6 +68,5 @@
         </li>
       </ul>
     </section>
-
 
 </template>

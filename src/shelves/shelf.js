@@ -3,7 +3,8 @@ import {inject} from 'aurelia-framework';
 import {State} from 'state';
 import {Router} from 'aurelia-router';
 
-// TODO: Rename class Binders
+import {Binders} from '../binders';
+
 
 @inject(State, Router)
 export class Shelf {
@@ -16,7 +17,18 @@ export class Shelf {
     this.redirectShelf = () => {
       router.navigate('shelves');
     };
+    // Binder form fields
+    this.title;
+    this.customer;
+    this.containerId;
   }
+
+  postBinderFromShelf() {
+    // Instantiate the imported class
+    let binders = new Binders;
+    binders.postBinder(
+      this.state, this.title, this.customer, this.containerId);
+  };
 
   /**
    * Delete shelf.
@@ -41,57 +53,13 @@ export class Shelf {
     });
   }
 
-  /**
-   * Post binder from a form.
-   * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
-   */
-  postBinder() {
-    let binderForm = {
-      title: this.title,
-      customer: this.customer,
-      container_id: this.containerId
-    };
-    this.state.http.fetch('api/shelves/binders/', {
-      headers: {
-        'Authorization': 'JWT ' + this.state.token,
-        'Accept': 'application/json',
-        'X-Requested-With': 'Fetch'
-      },
-      method: 'post',
-      body: json(binderForm)
-    })
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data);
-      alert('Binder created!');
-    })
-    .catch(error => {
-      alert('Binder error!');
-    });
-  }
-
-  /**
-   * Get binders.
-   * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
-   */
-  getBinders() {
-    this.state.http.fetch('api/shelves/binders/', {
-      headers: {
-        'Authorization': 'JWT ' + this.state.token,
-        'Accept': 'application/json',
-        'X-Requested-With': 'Fetch'
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data);
-      this.binders = data;
-    });
-  }
-
   getShelf = (id) => {
     // NOTE: Firefox require a slash ('/') at the end of the URL.
-    this.state.http.fetch('api/shelves/shelves/' + id + '/')
+    this.state.http.fetch('api/shelves/shelves/' + id + '/', {
+      headers: {
+        'Authorization': 'JWT ' + this.state.token
+      }
+    })
     .then(response => response.json())
     .then(data => {
       // console.log(data);

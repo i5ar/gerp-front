@@ -2,27 +2,27 @@
   <h1>${heading}</h1>
 
   <section>
-    <form role="form" submit.delegate="postBinder()">
+    <form role="form" submit.delegate="postBinder(state, title, customer, containerId)">
 
       <label for="title">Title</label>
       <input type="text" value.bind="title">
-      <br>
+      <br />
 
       <label for="customer">Customer</label>
       <input type="text" value.bind="customer">
-      <br>
+      <br />
 
       <label for="container_id">Container Id</label>
       <input type="number" value.bind="containerId">
-      <br>
+      <br />
 
-      <button type="submit">Submit</button>
+      <button type="submit">Submit binder</button>
 
     </form>
   </section>
 
   <section>
-    <button click.delegate="getBinders()">Get</button>
+    <button click.delegate="getBinders()">Get binders (paginated)</button>
   </section>
 
   <section>

@@ -13,19 +13,19 @@ export class App {
         name: 'binders',
         moduleId: 'binders',
         nav: true,
-        title: 'Binders (all)'},
+        title: 'Binders'},
       {
         route: 'customers',
         name: 'customers',
         moduleId: 'customers',
         nav: true,
-        title: 'Customers (filtered)'},
+        title: 'Customers'},
       {
         route: 'shelves',
         name: 'shelves',
         moduleId: 'shelves',
         nav: true,
-        title: 'Shelves (filtered)'},
+        title: 'Shelves'},
       {
         route: 'shelves/:id',
         name: 'shelf',

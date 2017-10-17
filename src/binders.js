@@ -8,24 +8,29 @@ export class Binders {
     this.heading = 'Binders';
     this.state = state;
     this.binders;
+    this.title;
+    this.customer;
+    this.containerId;
   }
 
-  title = '';
-  customer = '';
-  containerId;
   /**
    * Post binder from a form.
+   * If we want to reuse the method we must pass the form fields as arguments.
+   * @param {String} _state The state
+   * @param {String} _title The title field
+   * @param {String} _customer The customer field
+   * @param {String} _containerId The container id field
    * {@link http://aurelia.io/hub.html#/doc/article/aurelia/fetch-client/latest/http-services/}
    */
-  postBinder() {
+  postBinder(_state, _title, _customer, _containerId) {
     let binderForm = {
-      title: this.title,
-      customer: this.customer,
-      container_id: this.containerId
+      title: _title,
+      customer: _customer,
+      container_id: _containerId
     };
-    this.state.http.fetch('api/shelves/binders/', {
+    _state.http.fetch('api/shelves/binders/', {
       headers: {
-        'Authorization': 'JWT ' + this.state.token,
+        'Authorization': 'JWT ' + _state.token,
         'Accept': 'application/json',
         'X-Requested-With': 'Fetch'
       },
